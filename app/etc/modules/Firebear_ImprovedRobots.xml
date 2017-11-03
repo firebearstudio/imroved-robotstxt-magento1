@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Firebear_ImprovedRobots>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Firebear_ImprovedRobots>
+    </modules>
+</config>

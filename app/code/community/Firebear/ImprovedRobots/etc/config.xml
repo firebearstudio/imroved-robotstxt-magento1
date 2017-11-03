@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Firebear_ImprovedRobots>
+            <version>0.0.1</version>
+        </Firebear_ImprovedRobots>
+    </modules>
+    
+    <global>
+    	<helpers>
+            <improvedrobots>
+                <class>Firebear_ImprovedRobots_Helper</class>
+            </improvedrobots>
+        </helpers>
+        <blocks>
+             <improvedrobots>
+                <class>Firebear_ImprovedRobots_Block</class>
+             </improvedrobots>
+        </blocks>
+        <models>
+            <improvedrobots>
+                <class>Firebear_ImprovedRobots_Model</class>
+            </improvedrobots>
+        </models>
+        <events>
+            <admin_system_config_changed_section_improvedrobots>
+                <observers>
+                    <improvedrobots>
+                        <type>singleton</type>
+                        <class>improvedrobots/observer</class>
+                        <method>gimmeacall</method>
+                    </improvedrobots>
+                </observers>
+            </admin_system_config_changed_section_improvedrobots>
+        </events>
+    </global>
+    <frontend>
+        <routers>
+            <improvedrobots>
+                <use>standard</use>
+                <args>
+                    <module>Firebear_ImprovedRobots</module>
+                    <frontName>improvedrobots</frontName>
+                </args>
+            </improvedrobots>
+        </routers>
+	</frontend>
+	<admin>
+        <routers>
+            <adminhtml>
+                <args>
+                   <modules>
+                        <improvedrobots after="Mage_Adminhtml">Firebear_ImprovedRobots</improvedrobots>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+   </admin>
+
+</config>

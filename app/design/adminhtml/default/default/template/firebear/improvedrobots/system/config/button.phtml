@@ -1,0 +1,103 @@
+<style>
+.form-list td.value textarea {
+	height: 30em;
+}
+</style>
+<script type="text/javascript">
+    //<![CDATA[
+    function save() {
+        new Ajax.Request('<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/adminhtml_improvedrobots/save') ?>', {
+            method:     'post',
+            parameters: {improvedrobotscontent: document.getElementById("improvedrobotscontent").value},
+            onSuccess: function(transport){
+				
+				console.log(transport.responseText);
+			
+	            if (transport.responseText == 1){
+	                alert("Robots.txt updated!");
+	            }
+	            
+	            if (transport.responseText == 2){
+	                alert("Error in save file. Your robots.txt should be writable, please check file permissions and try again.");
+	            }
+	            
+	            if (transport.responseText == 3){
+	                alert("Error in save file. Your root folder should be writable, please check folder permissions and try again.");
+	            }
+            }
+        });
+    }
+    
+    function load(){
+    
+    	if (confirm("You current robots.txt be erased and improved robots content be added, you can make backup before continue. Are you sure?")){
+    	
+		    new Ajax.Request('<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/adminhtml_improvedrobots/load') ?>', {
+	            method:     'post',
+	            onSuccess: function(transport){
+					
+					console.log(transport.responseText);
+				
+		            if (transport.responseText == 1){
+		                alert("Robots.txt updated!");
+		                window.location.reload();
+		            }
+		            
+		            if (transport.responseText == 2){
+		                alert("Error in save file. Your robots.txt should be writable, please check file permissions and try again.");
+		            }
+		            
+		            if (transport.responseText == 3){
+		                alert("Error in save file. Your root folder should be writable, please check folder permissions and try again.");
+		            }
+	            }
+	        });;
+        
+        }
+	}
+    //]]>
+</script>
+
+<?php
+
+$path = BP . DS;
+$filepath= $path.'/robots.txt';
+$filename='robots.txt';
+if (file_exists($filepath)) 
+{
+	$fh =fopen($filename, "r");
+	$theData=file_get_contents($filename);
+	//print_R ($theData);
+	fclose($fh);
+}
+else
+	$theData='';
+?>
+  
+<button onclick="save()" class="scalable save" type="button"><span>Save robots.txt</span></button>
+<button onclick="load()" class="scalable" type="button"><span>Apply default improved robots.txt</span></button>
+
+<br /><br /><br />
+
+
+<div class="entry-edit">
+    	
+
+	
+		<form id="edit_form" name="edit_form" method="post" action="<?php echo $this->getUrl('*/*/save')?>">
+			<input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+			<table cellspacing="0" class="form-list">
+			<tr>
+				<td class="input-ele"><textarea rows="20" cols="80" name="improvedrobotscontent" id="improvedrobotscontent" style="width: 600px;"><?php echo $theData;?></textarea></td>
+			</tr>
+			</table>
+		</form>
+
+
+</div>
+<script type="text/javascript">
+    var editForm = new varienForm('edit_form');
+</script>
+
+
+<?php //echo $this->getButtonHtml() ?>

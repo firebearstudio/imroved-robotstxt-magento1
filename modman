@@ -1,0 +1,3 @@
+app/code/community/Firebear/ImprovedRobots/ app/code/community/Firebear/ImprovedRobots/
+app/design/adminhtml/default/default/template/firebear/improvedrobots app/design/adminhtml/default/default/template/firebear/improvedrobots
+app/etc/modules/Firebear_ImprovedRobots.xml app/etc/modules/Firebear_ImprovedRobots.xml
